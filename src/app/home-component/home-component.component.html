@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+         <h2 class="form-heading-2 text-center">PARKING ALLOTMENT AND DE-ALLOTMENT</h2>
+        </div>
+         <div class="card-body">
+           <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-title">
+                 <h5 class="form-heading-2">ENTRY</h5>
+                </div>
+                <div class="card-body">
+                  <form class="form login-form" (submit)="login()" [formGroup]="entryForm">
+                    <label for="carType" class="Input-label">Select Car Type</label>
+                    <select class="form-control" formControlName="carType" placeholder="Select Car Type">
+                      <option value="Motorcycle">Motorcycle</option>
+                      <option value="Car">Car</option>
+                      <option value="Bus">Bus</option>
+                    </select>
+                    <hr />
+                    <button type="submit" class="btn btn-primary float-right">
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-title">
+                 <h5 class="form-heading-2 text-center p-1">Ticket Details</h5>
+                </div>
+                <div class="card-body">
+                  <form class="form login-form"  (submit)="print()" [formGroup]="exitForm">
+                    <label for="carType" class="Input-label">Status: {{this.currentPark.status}}</label>
+                    <hr />
+                    <label>Level Number: {{this.currentPark.levelNo}}</label>
+                    <hr />
+                    <label>Row Number: {{this.currentPark.rowNo}}</label>
+                    <hr />
+                    <label>Slot Number:{{this.currentPark.slotNo}}</label>
+                    <hr />
+
+                    <button type="submit" class="btn btn-danger float-right">
+                      Print
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
