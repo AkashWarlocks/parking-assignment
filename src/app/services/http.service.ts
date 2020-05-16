@@ -11,7 +11,7 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   public httpPost(data: any) : any {
-    return this.http.post("http://localhost:3000/"+data.api, data.data)
+    return this.http.post("/"+data.api, data.data)
     .pipe(
       map((response: any)=>{
           //console.log(response);

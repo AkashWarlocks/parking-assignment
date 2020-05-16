@@ -1,5 +1,5 @@
 const express = require('express');
-const allotParkingRoutes = require('./routes/allotparking.route')
+const allotParkingRoutes = require('./assignment_carparking/routes/allotparking.route')
 const bodyParser = require('body-parser');
 
 const app = express ();
@@ -9,6 +9,8 @@ app.use(
     bodyParser.json()
 )
 
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
 
 
 app.use(function (req, res, next) {
@@ -35,5 +37,5 @@ app.listen(port, () => {
   console.log('Server is up on port ' + port);
 });
 
-
+module.exports = app;
 
