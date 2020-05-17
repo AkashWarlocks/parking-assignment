@@ -9,17 +9,21 @@
            <div class="row">
             <div class="col-sm-6">
               <div class="card">
-                <div class="card-title">
-                 <h5 class="form-heading-2">ENTRY</h5>
+                <div class="card-header" style="background: #cfc48c;">
+                 <h5 class="form-heading-2 text-center">ENTRY</h5>
                 </div>
                 <div class="card-body">
-                  <form class="form login-form" (submit)="login()" [formGroup]="entryForm">
+                  <form class="form login-form" (submit)="allotParking()" [formGroup]="entryForm">
                     <label for="carType" class="Input-label">Select Car Type</label>
                     <select class="form-control" formControlName="carType" placeholder="Select Car Type">
                       <option value="Motorcycle">Motorcycle</option>
                       <option value="Car">Car</option>
                       <option value="Bus">Bus</option>
                     </select>
+                    <hr />
+                    <label for = "vehicleNo">Vehicle Number</label>
+                    <input type="text" class="form-control" formControlName="vehicleNo" placeholder="Enter Vehicle Number">
+
                     <hr />
                     <button type="submit" class="btn btn-primary float-right">
                       Submit
@@ -30,7 +34,7 @@
             </div>
             <div class="col-sm-6">
               <div class="card">
-                <div class="card-title">
+                <div class="card-header background " style="background: #cfc48c;">
                  <h5 class="form-heading-2 text-center p-1">Ticket Details</h5>
                 </div>
                 <div class="card-body">
@@ -54,8 +58,67 @@
            </div>
          </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+
+        </div>
+      </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header" style="background: #cfc48c;">
+          <h2 class="form-heading-2 text-center">Search Vehicle By Number</h2>
+        </div>
+        <div class="card-body">
+          <div class="card-body">
+            <div class="row">
+             <div class="col-sm-6">
+               <div class="card">
+                 <div class="card-header" style="background: #cfc48c;">
+                  <h5 class="form-heading-2 text-center">ENTRY</h5>
+                 </div>
+                 <div class="card-body">
+                   <form class="form login-form" (submit)="getSinglevehicle()" [formGroup]="searchVehicle">
+                     <label for = "vehicleNo">Vehicle Number</label>
+                     <input type="text" class="form-control" formControlName="vehicleNo" placeholder="Enter Vehicle Number">
+                     <hr />
+                     <button type="submit" class="btn btn-primary float-right">
+                       Submit
+                     </button>
+                   </form>
+                 </div>
+               </div>
+             </div>
+             <div class="col-sm-6">
+               <div class="card">
+                 <div class="card-header background " style="background: #cfc48c;">
+                  <h5 class="form-heading-2 text-center p-1">Ticket Details</h5>
+                 </div>
+                 <div class="card-body">
 
+                     <label for="carType" class="Input-label">Status: {{this.currentVehicle.status}}</label>
+                     <hr />
+                     <label>Level Number: {{this.currentVehicle.data[0].levelNo}}</label>
+                     <hr />
+                     <label>Row Number: {{this.currentVehicle.data[0].rowNo}}</label>
+                     <hr />
+                     <label>Slot Number:{{this.currentVehicle.data[0].slots.slotNo}}</label>
+                     <hr />
 
+                    <!-- <button type="submit" class="btn btn-danger float-right" (onClick)="emptySlot(this.currentVehicle.data[0])">
+                       Exit
+                     </button>-->
+
+                 </div>
+               </div>
+             </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

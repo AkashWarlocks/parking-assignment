@@ -11,12 +11,21 @@ export class HomeComponentComponent implements OnInit {
   entryForm:FormGroup;
   exitForm:FormGroup
   currentPark:any = {}
+  searchVehicle:FormGroup
+  currentVehicle:any = {
+    levelNo:0,
+    rowNo:0,
+    slotNo:0,
+    vehicleType:"",
+    slotType:"",
+  }
 
   constructor(private HttpService:HttpService) { }
 
   ngOnInit(): void {
     this.entryForm = new FormGroup({
-      carType: new FormControl('Motorcycle')
+      carType: new FormControl('Motorcycle'),
+      vehicleNo: new FormControl('')
     })
     this.exitForm = new FormGroup({
       carType:new FormControl(''),
@@ -24,34 +33,45 @@ export class HomeComponentComponent implements OnInit {
       rowNo: new FormControl(''),
       slotNo:new FormControl(''),
     })
+    this.searchVehicle = new FormGroup({
+      vehicleNo: new FormControl('')
+    })
+
   }
 
-  login(){
+  allotParking(){
     const data = {
       api:"allotparking",
       data:{
-        carType:this.entryForm.value.carType
+        carType:this.entryForm.value.carType,
+        vehicleNo:this.entryForm.value.vehicleNo
       }
     }
     this.HttpService.httpPost(data).subscribe((res)=>{
-      this.currentPark = res
+      console.log(res)
+      this.currentPark.levelNo = res.data[0].levelNo
+      this.currentPark.rowNo = res.data[0].rowNo
+      this.currentPark.slotNo = res.data[0].slots.slotNo
+      this.currentPark.vehicleType = res.data[0].slots.vehicletype
+      this.currentPark.slotType = res.data[0].slots.slotType
     })
   }
   print(){
 
   }
-  selectType(carType){
-    console.log(carType)
+  getSinglevehicle(){
     const data = {
-      api:"getParkedData",
+      api:"getVehicleDetails",
       data:{
-        carType:carType
+        vehicleNo:this.searchVehicle.value.vehicleNo,
       }
     }
     this.HttpService.httpPost(data).subscribe((res)=>{
-      this.currentPark = res
-      console.log(this.currentPark)
+      console.log(res)
+      this.currentVehicle = res
     })
   }
+
+
 
 }

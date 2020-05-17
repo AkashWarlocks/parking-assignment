@@ -1,14 +1,67 @@
 <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header" style="background: #cfc48c;">
+          <h2 class="form-heading text-center">Current Count of Vehicles</h2>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Motorcycle</th>
+                <th>Car</th>
+                <th>Bus</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>{{totalVehicle.Motorcycle}}</td>
+              <td>{{totalVehicle.Car}}</td>
+              <td>{{totalVehicle.Bus}}</td>
+              <td>{{totalVehicle.Total}}</td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
 <div class="row">
-  <div class="col-10">
+  <div class="col-12">
     <div class="card">
-      <div class="card-header">
-        <h2 class="form-heading-2 text-center">CURRENT PARKED VEHICLES</h2>
+      <div class="card-header" style="background: #cfc48c;">
+        <h2 class="form-heading-2 text-center">EXIT PARKED VEHICLES</h2>
       </div>
       <div class="card-body">
-
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+               <th>#ID</th>
+               <th>LevelNo</th>
+               <th>RowNo</th>
+               <th>SlotNo</th>
+               <th>Vehicle</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let item of parkedData; let i = index">
+               <th>{{ i+1 }}</th>
+               <td>{{ item.levelNo }}</td>
+               <td>{{ item.rowNo }}</td>
+               <td>{{ item.slots.slotNo}}</td>
+               <td>{{ item.slots.vehicleNo }}</td>
+               <td>
+                  <button class ="btn btn-danger" (click)="emptySlot(item)" >Exit</button>
+               </td>
+            </tr>
+         </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
+
+
 </div>
