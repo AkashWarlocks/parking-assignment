@@ -48,12 +48,13 @@ export class HomeComponentComponent implements OnInit {
       }
     }
     this.HttpService.httpPost(data).subscribe((res)=>{
-      console.log(res)
-      this.currentPark.levelNo = res.data[0].levelNo
-      this.currentPark.rowNo = res.data[0].rowNo
-      this.currentPark.slotNo = res.data[0].slots.slotNo
-      this.currentPark.vehicleType = res.data[0].slots.vehicletype
-      this.currentPark.slotType = res.data[0].slots.slotType
+      console.log("allot",res)
+      this.currentPark.status= res.status
+      this.currentPark.levelNo = res.levelNo
+      this.currentPark.rowNo = res.rowNo
+      this.currentPark.slotNo = res.slotNo
+      this.currentPark.vehicleType = res.slots.vehicletype
+      this.currentPark.slotType = res.slots.slotType
     })
   }
   print(){
