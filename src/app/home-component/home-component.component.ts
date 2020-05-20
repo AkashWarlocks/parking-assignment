@@ -82,8 +82,10 @@ export class HomeComponentComponent implements OnInit {
     }
     this.HttpService.httpPost(data).subscribe((res)=>{
       console.log(res)
-      if(res.status == "Not Available"||res.status == "Please enter Vehicle Number"){
+      if(res.status == "Not Available"){
         this.currentVehicle.status = res.status
+        alert(res.status)
+        return
       } else{
         this.currentVehicle.status = res.status
         this.currentVehicle.levelNo = res.data[0].levelNo
