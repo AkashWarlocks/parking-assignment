@@ -24,18 +24,4 @@ export class HttpService {
     );;
 
   }
-
-  public httpImagePost(api: string, data: any) : any {
-    return this.http.post("http://localhost:3000/"+api, data)
-    .pipe(
-      map((response: any)=>{
-          return response;
-      }),
-      catchError(err => {
-          console.log(err)
-          return throwError("SOMETHING BAD HAPPENED");
-      })
-    );;
-
-  }
 }

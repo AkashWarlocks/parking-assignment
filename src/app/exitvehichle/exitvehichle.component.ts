@@ -67,9 +67,12 @@ export class ExitvehichleComponent implements OnInit {
     this.httpService.httpPost(data).subscribe((res)=>{
       console.log(res)
       alert("vehicle exited")
+      this.getParkedData(this.search)
+      this.getVehicleCount()
+
     })
-    this.getParkedData(this.search)
-    this.getVehicleCount()
+
+
   }
 
 }

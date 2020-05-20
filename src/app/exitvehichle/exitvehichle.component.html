@@ -42,6 +42,7 @@
                <th>RowNo</th>
                <th>SlotNo</th>
                <th>Vehicle</th>
+               <th>Type</th>
                <th>Action</th>
             </tr>
          </thead>
@@ -52,6 +53,7 @@
                <td>{{ item.rowNo }}</td>
                <td>{{ item.slots.slotNo}}</td>
                <td>{{ item.slots.vehicleNo }}</td>
+               <td>{{item.slots.vehicletype}}</td>
                <td>
                   <button class ="btn btn-danger" (click)="emptySlot(item)" >Exit</button>
                </td>

@@ -13,9 +13,9 @@ export class HomeComponentComponent implements OnInit {
   currentPark:any = {}
   searchVehicle:FormGroup
   currentVehicle:any = {
-    levelNo:0,
-    rowNo:0,
-    slotNo:0,
+    levelNo:null,
+    rowNo:null,
+    slotNo:null,
     vehicleType:"",
     slotType:"",
   }
@@ -25,7 +25,7 @@ export class HomeComponentComponent implements OnInit {
   ngOnInit(): void {
     this.entryForm = new FormGroup({
       carType: new FormControl('Motorcycle'),
-      vehicleNo: new FormControl('')
+      vehicleNo: new FormControl(null,[Validators.required])
     })
     this.exitForm = new FormGroup({
       carType:new FormControl(''),
@@ -34,12 +34,17 @@ export class HomeComponentComponent implements OnInit {
       slotNo:new FormControl(''),
     })
     this.searchVehicle = new FormGroup({
-      vehicleNo: new FormControl('')
+      vehicleNo: new FormControl(null,[Validators.required])
     })
 
   }
 
   allotParking(){
+
+    if(this.entryForm.invalid){
+      this.entryForm.get("vehicleNo").dirty
+      return
+    }
     const data = {
       api:"allotparking",
       data:{
@@ -49,18 +54,26 @@ export class HomeComponentComponent implements OnInit {
     }
     this.HttpService.httpPost(data).subscribe((res)=>{
       console.log("allot",res)
+      if(res.status == "parking Not Available"){
+        this.currentPark.status= res.status
+        alert(res.status)
+        return
+      }
       this.currentPark.status= res.status
       this.currentPark.levelNo = res.levelNo
       this.currentPark.rowNo = res.rowNo
       this.currentPark.slotNo = res.slotNo
-      this.currentPark.vehicleType = res.slots.vehicletype
-      this.currentPark.slotType = res.slots.slotType
+
     })
   }
   print(){
 
   }
   getSinglevehicle(){
+    if(this.searchVehicle.invalid){
+      this.searchVehicle.dirty
+      return
+    }
     const data = {
       api:"getVehicleDetails",
       data:{
@@ -69,9 +82,19 @@ export class HomeComponentComponent implements OnInit {
     }
     this.HttpService.httpPost(data).subscribe((res)=>{
       console.log(res)
-      this.currentVehicle = res
+      if(res.status == "Not Available"||res.status == "Please enter Vehicle Number"){
+        this.currentVehicle.status = res.status
+      } else{
+        this.currentVehicle.status = res.status
+        this.currentVehicle.levelNo = res.data[0].levelNo
+        this.currentVehicle.rowNo = res.data[0].rowNo
+        this.currentVehicle.slotNo = res.data[0].slots.slotNo
+        this.currentVehicle.vehicleType = res.data[0].slots.vehicletype
+      }
+
     })
   }
+  get vehicleNo() { return this.entryForm.get('vehicleNo'); }
 
 
 

@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-         <h2 class="form-heading-2 text-center">PARKING ALLOTMENT AND DE-ALLOTMENT</h2>
+        <div class="card-header"  style="background: #cfc48c;">
+         <h2 class="form-heading-2 text-center">PARKING ALLOTMENT</h2>
         </div>
          <div class="card-body">
            <div class="row">
@@ -22,8 +22,15 @@
                     </select>
                     <hr />
                     <label for = "vehicleNo">Vehicle Number</label>
-                    <input type="text" class="form-control" formControlName="vehicleNo" placeholder="Enter Vehicle Number">
-
+                    <input type="text" class="form-control" formControlName="vehicleNo" placeholder="Enter Vehicle Number" required>
+                    <br>
+                    <div
+                    *ngIf="entryForm.get('vehicleNo').invalid && (entryForm.get('vehicleNo').dirty|| entryForm.get('vehicleNo').touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="vehicleNo.errors.required">
+                        Vehicle Number is required.
+                      </div>
+                    </div>
                     <hr />
                     <button type="submit" class="btn btn-primary float-right">
                       Submit
@@ -58,13 +65,10 @@
            </div>
          </div>
       </div>
-      <div class="card">
-        <div class="card-header">
 
-        </div>
-      </div>
     </div>
   </div>
+  <br/>
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -82,7 +86,15 @@
                  <div class="card-body">
                    <form class="form login-form" (submit)="getSinglevehicle()" [formGroup]="searchVehicle">
                      <label for = "vehicleNo">Vehicle Number</label>
-                     <input type="text" class="form-control" formControlName="vehicleNo" placeholder="Enter Vehicle Number">
+                     <input type="text" class="form-control" formControlName="vehicleNo" placeholder="Enter Vehicle Number" required>
+                     <br>
+                     <div
+                        *ngIf="searchVehicle.get('vehicleNo').invalid && (searchVehicle.get('vehicleNo').dirty|| searchVehicle.get('vehicleNo').touched)"
+                         class="alert alert-danger">
+                        <div *ngIf="vehicleNo.errors.required">
+                          Vehicle Number is required.
+                        </div>
+                    </div>
                      <hr />
                      <button type="submit" class="btn btn-primary float-right">
                        Submit
@@ -97,7 +109,6 @@
                   <h5 class="form-heading-2 text-center p-1">Ticket Details</h5>
                  </div>
                  <div class="card-body">
-
                      <label for="carType" class="Input-label">Status: {{this.currentVehicle.status}}</label>
                      <hr />
                      <label>Level Number: {{this.currentVehicle.levelNo}}</label>
@@ -106,7 +117,7 @@
                      <hr />
                      <label>Slot Number:{{this.currentVehicle.slotNo}}</label>
                      <hr />
-
+                    <label >Vehicle Type: {{this.currentVehicle.vehicleType}}</label>
                     <!-- <button type="submit" class="btn btn-danger float-right" (onClick)="emptySlot(this.currentVehicle.data[0])">
                        Exit
                      </button>-->
